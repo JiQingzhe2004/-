@@ -1,1 +1,326 @@
+<!-- 此项目由AiQiji开源，更多请访问https://aiqji.com
+    作者：AiQiji
+    ©AiQiji 2024
+    此代码，所有人可任意更改和使用，但请保留此版权信息。（代码内部，此部分注释保留即可） -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiQiji课程表生成器</title>
+    <link rel="icon" href="https://aiqji.com/wp-content/uploads/2024/04/b979a668966583d29ca50ad4af5ea9f2-1-1.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #968686;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #course-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 800px;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #68cff4, #979ba2);
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #course-list div {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            min-width: 80px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }        
+        #course-list div:hover {
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            transform: scale(1.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td[contenteditable="true"]:hover {
+            background-color: #f9f9f9;
+        }
+        td[contenteditable="true"] {
+            cursor: pointer;
+        }
+        .btn {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .save-btn2 {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            justify-content: center;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            flex-direction: row;
+            transition: background-color 0.3s ease;
+        }
+        .save-btn3 {
+            background-color: #7b341c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .save-btn1 {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0051ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            justify-content: center;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            flex-direction: row;
+            transition: background-color 0.3s ease;
+        }
+        .save-btn2:hover, .save-btn1:hover {
+            background-color: #371673;
+            transform: scale(1.05);
+        }
+        .info {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .info p {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 contenteditable="true">我的课程表</h1>
+        <table id="schedule" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <tr>
+                <th>时间</th>
+                <th>星期一</th>
+                <th>星期二</th>
+                <th>星期三</th>
+                <th>星期四</th>
+                <th>星期五</th>
+            </tr>
+            <tr>
+                <td contenteditable="true">8:30 - 9:15</td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">9:25 - 10:10</td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">10:20 - 11:05</td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            </tr>
+            <tr>
+                <td contenteditable="true">11:15 - 12:00</td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td contenteditable="true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="course-list" style="margin-top: 10px;">
+        <div draggable="true" ondragstart="drag(event)" data-course="语文">语文</div>
+        <div draggable="true" ondragstart="drag(event)" data-course="数学">数学</div>
+        <div draggable="true" ondragstart="drag(event)" data-course="英语">英语</div>
+    </div>
+    <div class="btn">
+        <button class="save-btn2" onclick="addCourse()">添加课程</button>
+        <button class="save-btn3" onclick="removeCourse()">删除课程</button>
+        <button class="save-btn2" onclick="addTime()">添加时间</button>
+        <button class="save-btn3" onclick="removeTime()">删除时间</button>
+        <button class="save-btn2" onclick="addDay()">添加星期</button>
+        <button class="save-btn3" onclick="removeDay()">删除星期</button>
+        <button class="save-btn1" onclick="saveSchedule()">保存为图片</button>
+    </div>
+    <div class="info">
+        <h1>使用方法</h1>
+        <p>课程表名称可以直接编辑</p>
+        <p>课程、时间段、星期，均可以任意添加和删除</p>
+        <p>只需要将课程拖入课程表内即可</p>
+        <p>点击保存按钮，即可将课程表保存为图片至本机</p>
+        <p style="text-align: center; color: #747474;">© 2024 AiQiji</p>
+    </div>
+    <script>
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.dataset.course);
+        }
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            if (event.target.tagName === "TD") {
+                event.target.innerText = data;
+            }
+        }
+        function saveSchedule() {
+            html2canvas(document.querySelector(".container")).then(canvas => {
+                var imgData = canvas.toDataURL('image/png');
+                var link = document.createElement('a');
+                link.href = imgData;
+                link.download = 'schedule.png';
+                link.click();
+            });
+        }
+        function addCourse() {
+            var courseName = prompt("请输入课程名称");
+            if (courseName) {
+                var courseList = document.getElementById("course-list");
+                var newCourse = document.createElement("div");
+                newCourse.textContent = courseName;
+                newCourse.draggable = "true";
+                newCourse.ondragstart = drag;
+                newCourse.dataset.course = courseName;
+                courseList.appendChild(newCourse);
+            }
+        }
+        function addDay() {
+            var schedule = document.getElementById("schedule");
+            var courseName = prompt("请输入星期几");
+            if (courseName) {
+                var th = document.createElement("th");
+                th.innerText = courseName;
+                th.contentEditable = "true";
+                schedule.rows[0].appendChild(th);
 
+                for (var i = 1; i < schedule.rows.length; i++) {
+                    var td = document.createElement("td");
+                    td.contentEditable = "true";
+                    td.ondrop = drop;
+                    td.ondragover = allowDrop;
+                    schedule.rows[i].appendChild(td);
+                }
+            }
+        }
+        function removeDay() {
+            var schedule = document.getElementById("schedule");
+            for (var i = 0; i < schedule.rows.length; i++) {
+                if (schedule.rows[i].cells.length > 1) {
+                    schedule.rows[i].deleteCell(-1);
+                }
+            }
+        }
+        function addTime() {
+            var schedule = document.getElementById("schedule");
+            var tr = document.createElement("tr");
+            var th = document.createElement("th");
+            
+            var startTimeInput = document.createElement("input");
+            startTimeInput.type = "time";
+            startTimeInput.style.marginRight = "5px";
+            var endTimeInput = document.createElement("input");
+            endTimeInput.type = "time";
+            var isStartTimeSelected = false;
+            startTimeInput.addEventListener("change", function() {
+                isStartTimeSelected = true;
+                endTimeInput.disabled = false;
+                endTimeInput.focus();
+            });
+            endTimeInput.addEventListener("change", function() {
+                if (isStartTimeSelected) {
+                    updateHeader();
+                } else {
+                    startTimeInput.focus();
+                }
+            });
+            th.appendChild(startTimeInput);
+            th.appendChild(document.createTextNode(" - "));
+            th.appendChild(endTimeInput);
+            tr.appendChild(th);
+            for (var i = 1; i < schedule.rows[0].cells.length; i++) {
+                var td = document.createElement("td");
+                td.contentEditable = "true";
+                td.ondrop = drop;
+                td.ondragover = allowDrop;
+                tr.appendChild(td);
+            }
+            schedule.appendChild(tr);
+            function updateHeader() {
+                th.innerText = startTimeInput.value + " - " + endTimeInput.value;
+            }
+        }
+        function removeTime() {
+            var schedule = document.getElementById("schedule");
+            if (schedule.rows.length > 2) {
+                schedule.removeChild(schedule.lastElementChild);
+            }
+        }
+        function removeCourse() {
+            var courseList = document.getElementById("course-list");
+            if (courseList.children.length > 0) {
+                courseList.removeChild(courseList.lastElementChild);
+            }
+        }
+    </script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html>
+<!-- 此项目由AiQiji开源，更多请访问https://aiqji.com
+    作者：AiQiji
+    ©AiQiji 2024
+    此代码，所有人可任意更改和使用，但请保留此版权信息。（代码内部，此部分注释保留即可） -->

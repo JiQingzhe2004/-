@@ -119,6 +119,20 @@
             flex-direction: row;
             transition: background-color 0.3s ease;
         }
+        .save-btn0 {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            justify-content: center; /* Add this line */
+            margin: 0 auto;
+            margin-bottom: 10px;
+            flex-direction: row; /* Add this line */
+            transition: background-color 0.3s ease;
+        }
         .save-btn2:hover, .save-btn1:hover {
             background-color: #371673;
             transform: scale(1.05);
@@ -195,6 +209,8 @@
         <button class="save-btn2" onclick="addDay()">添加星期</button>
         <button class="save-btn3" onclick="removeDay()">删除星期</button>
         <button class="save-btn1" onclick="saveSchedule()">保存为图片</button>
+        <!--<button class="save-btn0" onclick="window.history.back()">返回AiQiji</button>-->
+        <!--这个按钮是返回上一个页面，若使用就将注释括号去掉-->
     </div>
     <div class="info">
         <h1>使用方法</h1>

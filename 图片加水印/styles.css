@@ -1,7 +1,8 @@
 body {
     background-image: url('https://s3-eu-west-1.amazonaws.com/cdn.metooo.common/bgs/589.jpeg');
-    background-size: auto; /* 保持图片的原始大小 */
+    background-size: cover; /* 背景图像始终覆盖整个元素 */
     background-position: center;
+    background-attachment: fixed; /* 背景图像固定在视口中 */
     display: flex;
     flex-direction: column;
     align-items: center;

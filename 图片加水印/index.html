@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://wx.qlogo.cn/mmopen/xPBpBibJMLofU0ibHTUCAAjzV7Z4fy8et5zxe3wjFdJMaLWUzKUSa0yfxsElWl1NAaSC64licGo4sEXpWY6LWOTtuBh7jicTwWBhmPDfbOBJJial8XqngwXu7b3R49fnTsiaBn/0">
+    <title>AiQiji加水印</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>AiQiji照片加水印</h1>
+    </header>
+    <div id="preview">小尺寸图片建议使用图片水印<br><br>小贴士：操作完点击“添加水印”即可！</div>
+    <input type="file" id="file-input" accept="image/*" style="display: none;">
+    <div id="lightbox" style="display: none;">
+        <img id="lightbox-image" src="" alt="灯箱图片">
+    </div>
+    <button id="upload-button">上传照片</button>
+    <div id="watermark-type">
+        <label>
+            <input type="radio" name="watermark" value="text">
+            文字水印
+        </label>
+        <label>
+            <input type="radio" name="watermark" value="image">
+            图片水印
+        </label>
+    </div>
+    <div id="text-watermark" class="watermark-option">
+        <input type="text" id="watermark-text" placeholder="输入水印文字">
+        <select id="text-position">
+            <option value="top-left">左上角</option>
+            <option value="top-right">右上角</option>
+            <option value="center">中心</option>
+            <option value="bottom-left">左下角</option>
+            <option value="bottom-right">右下角</option>
+        </select>
+        <input type="number" id="font-size" placeholder="字体大小" min="10" max="100" value="100">
+        <input type="color" id="font-color" value="#000000">
+        <input type="range" id="alpha-picker" min="0" max="1" step="0.01" value="1">
+    </div>
+    <div id="image-watermark" class="watermark-option">
+        <input type="file" id="watermark-image" accept="image/*">
+        <label for="watermark-image">选择水印图片</label>
+        <select id="image-position">
+            <option value="top-left">左上角</option>
+            <option value="top-right">右上角</option>
+            <option value="center">中心</option>
+            <option value="bottom-left">左下角</option>
+            <option value="bottom-right">右下角</option>
+        </select>
+        <input type="number" id="image-opacity" placeholder="透明度 (0-1)" min="0" max="1" step="0.1" value="1">
+        <input type="number" id="image-size" placeholder="大小 (%)" min="10" max="100" value="50">
+    </div>
+    <button id="add-watermark-button">添加水印</button>
+    <button id="download-button">下载图片</button>
+    <canvas id="canvas"></canvas>
+    <div id="loading" style="display: none;">
+        <img src="AiQiji.svg" alt="loging" width="100px" height="100px" style="z-index: 100000;">
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
 

@@ -1,0 +1,74 @@
+/* mobile.css */
+
+/* 当宽度小于等于430像素时的布局 */
+@media (max-width: 1001px) {
+    body {
+        font-size: 14px; /* 调整字体大小 */
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px; /* 减少内边距 */
+        height: auto; /* 高度自适应 */
+        margin-top: 80px; /* 添加上边距 */
+    }
+
+    .header {
+        position: static;
+        margin-bottom: 20px;
+        position: fixed; /* 固定位置 */
+        height: 40px; /* 固定高度 */
+    }
+
+    .logo {
+        max-width: 40px; /* 调整最大宽度 */
+        height: auto;
+        margin-right: 10px;
+    }
+
+    .left-panel,
+    .center-panel,
+    .right-panel {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .center-panel {
+        padding: 10px; /* 减少内边距 */
+    }
+
+    .left-panel h2 {
+        font-size: 16px; /* 调整字体大小 */
+    }
+
+    .progress-box,
+    .notification {
+        font-size: 14px; /* 调整字体大小 */
+    }
+
+    .port-buttons {
+        flex-direction: column;
+    }
+
+    .port-button {
+        width: 100%;
+        margin-bottom: 10px; /* 添加下边距 */
+    }
+
+    .custom-port input {
+        width: 60%; /* 调整输入框宽度 */
+        height: 100%;
+    }
+
+    .confirm-button {
+        width: 100px; /* 调整按钮宽度 */
+        height: 100%;
+        margin-left: 10px; /* 保持间距 */
+    }
+
+    .attack-log {
+        height: auto; /* 高度自适应 */
+        max-height: 200px; /* 最大高度 */
+    }
+}

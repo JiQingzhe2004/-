@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDoS 攻击</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="icon" href="logo.png">
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo">
+    </div>
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                <span class="close">&times;</span>
+                <img class="lightbox-content" id="lightbox-img">
+            </div>
+    <div class="container">
+        <div class="left-panel">
+            <h2>攻击进展预览</h2>
+            <div class="image-container">
+                <img src="https://api.dujin.org/bing/1920.php" alt="图片" class="zuo1" id="zuo1-image" onclick="openLightbox()">
+                <div class="hover-text">点击图片放大</div>
+            </div>            <div class="progress-box">
+                <p id="progress-target" class="placeholder">这里显示被攻击域名或IP</p>
+            </div>
+            <div class="progress-box">
+                <div class="time-unit-container"><span style="color: rgb(245, 223, 223);">已攻击</span>                    
+                    <span id="progress-duration" class="placeholder">秒或分钟</span>
+                    <select id="time-unit" class="time-unit">
+                        <option value="seconds">秒</option>
+                        <option value="minutes">分钟</option>
+                    </select>
+                </div>
+            </div>
+            <div class="progress-box">
+                <p id="progress-count" class="placeholder">攻击总次数</p>
+            </div>
+            <div class="progress-box">
+                <p id="progress-method" class="placeholder">介绍攻击方法和请求方法</p>
+            </div>
+            <p class="banquan">© 2024 AiQiji 版权所属</p>
+        </div>
+        <div class="center-panel">
+            <h1>强大的攻击工具<samp class="buxin">不信？告诉我你的网址，试一试！</samp></h1>
+            <label for="target-ip">目标 IP 地址：<span class="required">⁕</span></label>
+            <input type="text" id="target-ip" placeholder="示例:（域名：example.com&nbsp;或&nbsp;IP: 8.8.8.8）" required>
 
+            <label for="target-port">目标端口：<span class="required">⁕</span></label>
+            <div class="port-selection">
+                <input type="text" id="display-port" readonly placeholder="默认选择80 或443，请在下方选择或自定义">
+                <div class="port-buttons">
+                    <button type="button" class="port-button" onclick="selectPort(80)">80端口（http开头的网站）</button>
+                    <button type="button" class="port-button" onclick="selectPort(443)">443端口（https开头的网站）</button>
+                </div>
+                <div class="custom-port">
+                    <input type="number" id="custom-port" placeholder="此处填写自定义端口号">
+                    <button type="button" class="confirm-button" onclick="confirmCustomPort()">确定</button>
+                </div>
+                
+            </div>
+
+            <label for="attack-mode">攻击方法：<span class="required">⁕</span></label>
+            <select id="attack-mode" onchange="showDescription()" required>
+                <option value="udp-flood">UDP Flood</option>
+                <option value="http-flood">HTTP Flood(目标地址前加上http或https请求头)</option>
+                <option value="slowloris">Slowloris</option>
+                <option value="loic">LOIC (Low Orbit Ion Cannon)</option>
+                <option value="hoic">HOIC (High Orbit Ion Cannon)</option>
+            </select>
+
+            <label for="request-method">请求方法：<span class="required">⁕</span></label>
+            <select id="request-method" onchange="showDescription()" required>
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+            </select>
+
+            <label for="request-frequency">每个 IP 的请求次数：<span class="required">⁕</span></label>
+            <input type="number" id="request-frequency" required placeholder="建议先用10以内的测试">
+
+            <label for="attack-duration">攻击时长或次数：</label>
+            <div class="time-unit-container">
+                <input type="number" id="attack-duration" placeholder="输入数字">
+                <select id="duration-unit" class="time-unit2">
+                    <option value="seconds">秒</option>
+                    <option value="minutes">分钟</option>
+                    <option value="count">次数</option>
+                </select>
+            </div>
+
+            <button id="start-attack" disabled>开始攻击</button>
+        </div>
+        <div class="right-panel">
+            <div class="notification" style="border: 1.5px dashed rgb(0, 0, 0); height: 80px;">
+                <img src="注意.svg" alt="Icon" width="50" height="50">
+                <h2 style="color: brown;">注意：</h2>
+                <p style="color: #6b2d2d;">所有后果以及责任，均与本站无关，应由使用者个人承担相应责任和后果；使用则代表同意本条例，不同意请勿使用。<br>
+                    (<span style="color: #000000;">⁕</span>)代表必填项</p>
+            </div>
+            <div class="attack-log">
+                <h2>实时攻击反馈</h2>
+                <pre id="progress-log"></pre>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
